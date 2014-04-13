@@ -11,8 +11,9 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import ru.server.filters.RequestLogFilter;
-import ru.server.resources.VideoResource;
+import ru.server.resources.SimpleResource;
 import ru.server.services.ScalaWebService;
+import ru.server.services.WebService;
 
 public class BootstrapService {
 
@@ -70,7 +71,8 @@ public class BootstrapService {
 
   static class GuiceServletConfig extends GuiceServletContextListener {
     final Module resources = binder -> {
-      binder.bind(VideoResource.class).in(Singleton.class);
+      binder.bind(SimpleResource.class).in(Singleton.class);
+      binder.bind(WebService.class).to(ScalaWebService.class);
     };
 
     @Override

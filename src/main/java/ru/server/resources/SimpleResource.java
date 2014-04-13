@@ -7,20 +7,18 @@ import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.server.domain.Video;
-import ru.server.services.JavaWebService;
+import ru.server.services.WebService;
 
 @Path("/video")
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-public class VideoResource {
+public class SimpleResource {
 
-  private final JavaWebService javaWebService;
-
+  private final WebService webService;
   private Logger logger = LoggerFactory.getLogger("general");
-  //private Logger logger = LoggerFactory.getLogger(VideoResource.class);
 
   @Inject
-  VideoResource(JavaWebService javaWebService) {
-    this.javaWebService = javaWebService;
+  SimpleResource(WebService webService) {
+    this.webService = webService;
   }
 
   @GET
