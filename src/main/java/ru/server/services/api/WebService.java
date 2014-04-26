@@ -1,4 +1,4 @@
-package ru.server.services;
+package ru.server.services.api;
 
 import rx.Observable;
 

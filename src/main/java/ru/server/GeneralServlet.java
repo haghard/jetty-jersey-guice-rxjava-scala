@@ -5,7 +5,7 @@ import org.eclipse.jetty.continuation.Continuation;
 import org.eclipse.jetty.continuation.ContinuationSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.server.services.WebService;
+import ru.server.services.api.WebService;
 import rx.functions.Action1;
 
 import javax.servlet.ServletException;

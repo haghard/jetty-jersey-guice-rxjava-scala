@@ -7,7 +7,7 @@ import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.server.domain.Video;
-import ru.server.services.WebService;
+import ru.server.services.api.WebService;
 
 @Path("/video")
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })

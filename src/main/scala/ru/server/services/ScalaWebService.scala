@@ -1,10 +1,10 @@
 package ru.server.services
 
+import scala.concurrent.Promise
 import scala.util.Try
 import org.slf4j.LoggerFactory
-import scala.concurrent.Promise
 import rx.lang.scala.Observable
-import java.util.concurrent.TimeUnit
+import ru.server.services.api.WebService
 
 object ScalaWebService {
   def apply() = new ScalaWebService
@@ -18,7 +18,7 @@ class ScalaWebService extends WebService {
 
   private val logger = LoggerFactory.getLogger("general")
   import rx.lang.scala.JavaConversions.toJavaObservable
-  implicit val executionCtx = scala.concurrent.ExecutionContext.fromExecutor(externalIOExecutor)
+
 
   def stream(): rx.Observable[_ <:String] = {
     val p = Promise[String]

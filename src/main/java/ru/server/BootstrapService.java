@@ -13,7 +13,7 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import ru.server.filters.RequestLogFilter;
 import ru.server.resources.SimpleResource;
 import ru.server.services.ScalaWebService;
-import ru.server.services.WebService;
+import ru.server.services.api.WebService;
 
 public class BootstrapService {
 

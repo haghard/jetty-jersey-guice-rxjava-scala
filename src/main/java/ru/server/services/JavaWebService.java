@@ -5,6 +5,7 @@ import com.ning.http.client.ListenableFuture;
 import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.server.services.api.WebService;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 import java.io.IOException;
