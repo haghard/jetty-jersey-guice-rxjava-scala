@@ -116,6 +116,20 @@
     </dependency>
   </dependencies>
 
+  <repositories>
+    <repository>
+      <id>codehausSnapshots</id>
+      <name>Codehaus Snapshots</name>
+      <releases>
+        <enabled>false</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <url>http://repository.springsource.com/maven/bundles/external/</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+
   <build>
     <plugins>
       <plugin>
