@@ -16,13 +16,13 @@ import javax.ws.rs.HttpMethod;
 import java.io.IOException;
 import java.io.Writer;
 
-public class WebServlet extends HttpServlet {
+public class GeneralServlet extends HttpServlet {
 
   private WebService webService;
 
   private static Logger logger = LoggerFactory.getLogger("general");
 
-  public WebServlet(WebService webService) {
+  public GeneralServlet(WebService webService) {
     this.webService = webService;
   }
 

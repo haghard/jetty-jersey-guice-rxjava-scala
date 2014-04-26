@@ -19,7 +19,7 @@ public class BootstrapService {
 
   private static final int JETTY_MAX_THREADS = 20;
   private static final int JETTY_MIN_THREADS = 20;
-  private static final int JETTY_THREAD_IDLE_TIMEOUT = 1000*60*60;
+  private static final int JETTY_THREAD_IDLE_TIMEOUT = 1000 * 60 * 60;
 
   /*
    * curl -i -H  "Accept: application/json" GET http://localhost:9000/wiki/1
@@ -54,7 +54,7 @@ public class BootstrapService {
     context.addServlet(DefaultServlet.class, "/");
 
     context.addServlet(
-      new ServletHolder(new WebServlet(ScalaWebService.apply())),
+      new ServletHolder(new GeneralServlet(ScalaWebService.apply())),
       "/wiki/*"
     );
 
@@ -83,7 +83,7 @@ public class BootstrapService {
           //hook Jackson into Jersey as the POJO <-> JSON mapper
           bind(JacksonJsonProvider.class).in(Scopes.SINGLETON);
           // Route all requests through GuiceContainer
-          serve("/wiki/*").with(WebServlet.class);
+          serve("/wiki/*").with(GeneralServlet.class);
           serve("/*").with(GuiceContainer.class);
         }
       });
