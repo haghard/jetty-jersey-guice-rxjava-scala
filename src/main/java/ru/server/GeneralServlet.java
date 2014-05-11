@@ -26,7 +26,6 @@ public class GeneralServlet extends HttpServlet {
     this.webService = webService;
   }
 
-
   public void init() {}
 
   @Override
