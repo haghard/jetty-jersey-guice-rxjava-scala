@@ -49,7 +49,7 @@ public class GeneralServlet extends HttpServlet {
     //cnt.setTimeout(5000);
     cnt.suspend(resp);
 
-    webService.stream().subscribe(new Action1<String>() {
+    webService.htmlStream().subscribe(new Action1<String>() {
       @Override
       public void call(String response) {
         logger.info("Notify:" + Thread.currentThread().getName());

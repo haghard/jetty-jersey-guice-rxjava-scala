@@ -19,7 +19,7 @@ class ScalaWebService extends WebService {
   private val logger = LoggerFactory.getLogger("general")
   import rx.lang.scala.JavaConversions.toJavaObservable
 
-  def stream(): rx.Observable[_ <:String] = {
+  def htmlStream: rx.Observable[_ <:String] = {
     val p = Promise[String]
     val future = WS.execute()
     future.addListener(new Runnable {

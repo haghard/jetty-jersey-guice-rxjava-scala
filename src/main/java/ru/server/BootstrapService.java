@@ -14,11 +14,12 @@ import ru.server.filters.RequestLogFilter;
 import ru.server.resources.SimpleResource;
 import ru.server.services.ScalaWebService;
 import ru.server.services.api.WebService;
+import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 
 public class BootstrapService {
 
-  private static final int JETTY_MAX_THREADS = 20;
-  private static final int JETTY_MIN_THREADS = 20;
+  private static final int JETTY_MAX_THREADS = 11;
+  private static final int JETTY_MIN_THREADS = 11;
   private static final int JETTY_THREAD_IDLE_TIMEOUT = 1000 * 60 * 60;
 
   /*
@@ -53,18 +54,14 @@ public class BootstrapService {
 
     context.addServlet(DefaultServlet.class, "/");
 
-    context.addServlet(
-      new ServletHolder(new GeneralServlet(ScalaWebService.apply())),
-      "/wiki/*"
-    );
+    context.addServlet(new ServletHolder(new GeneralServlet(ScalaWebService.apply())), "/video/*");
+    context.addServlet(CallLogServlet.class, "/io");
+    context.addServlet(HystrixMetricsStreamServlet.class, "/hystrix.stream");
 
     server.setStopAtShutdown(true);
 
     // Start the server
-    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-      server.getStopAtShutdown();
-    }));
-
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> { server.getStopAtShutdown(); }));
     server.start();
     server.join();
   }

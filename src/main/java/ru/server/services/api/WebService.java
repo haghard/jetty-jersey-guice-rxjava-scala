@@ -9,6 +9,6 @@ import rx.Observable;
  */
 public interface WebService {
 
-  Observable<? extends String> stream();
+  Observable<? extends String> htmlStream();
 
 }

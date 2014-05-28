@@ -41,7 +41,7 @@ public class JavaWebService implements WebService {
     return promise;
   }
 
-  public Observable<? extends String> stream() {
+  public Observable<? extends String> htmlStream() {
     return Observable.from(invoke(), Schedulers.executor(package$.MODULE$.externalIOExecutor()));
   }
 }
