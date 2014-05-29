@@ -55,7 +55,10 @@ public class BootstrapService {
     context.addServlet(DefaultServlet.class, "/");
 
     context.addServlet(new ServletHolder(new GeneralServlet(ScalaWebService.apply())), "/video/*");
-    context.addServlet(CallLogServlet.class, "/io");
+    //
+    context.addServlet(new ServletHolder(FaultTolerantServlet.apply()), "/io/*");
+
+    //curl http://localhost:9000/hystrix.stream
     context.addServlet(HystrixMetricsStreamServlet.class, "/hystrix.stream");
 
     server.setStopAtShutdown(true);

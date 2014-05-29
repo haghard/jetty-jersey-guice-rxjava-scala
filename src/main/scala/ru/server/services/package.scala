@@ -3,6 +3,10 @@ package ru.server
 import java.util.concurrent.{ThreadFactory, Executors, ExecutorService}
 import java.util.concurrent.atomic.AtomicInteger
 import com.ning.http.client.{AsyncHttpClientConfig, AsyncHttpClient}
+import rx.functions.Action1
+import org.eclipse.jetty.continuation.Continuation
+import java.io.PrintWriter
+import javax.servlet.http.HttpServletResponse
 
 package object services {
 
@@ -26,4 +30,33 @@ package object services {
       .setConnectionTimeoutInMs(timeout)
       .setExecutorService(externalIOExecutor).build)
       .prepareGet(URL)
+
+  implicit def action1ToFunc[T](f: T => Unit) = {
+    new Action1[T] {
+      override def call(a: T) = f(a)
+    }
+  }
+
+  def respondAsync(c: Continuation, resp: HttpServletResponse)(f: PrintWriter => Unit) = {
+    c.suspend(resp)
+    val writer = c.getServletResponse.getWriter
+    try {
+      f(writer)
+    } finally {
+      writer.flush
+      writer.close
+      c.complete
+    }
+  }
+
+  //http://www.jroller.com/ouertani/entry/scala_try_with_resources
+  def tryWith[T <% AutoCloseable,E](w: T, c: Continuation)(f: T => Unit) = {
+    try {
+      f(w)
+    }
+    finally {
+      w.close
+      c.complete
+    }
+  }
 }
